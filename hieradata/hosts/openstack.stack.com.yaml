@@ -1,0 +1,66 @@
+---
+
+## ZABBIX REPO Install:
+## --------------------
+zabbix_repo_url  : 'http://repo.zabbix.com/zabbix/3.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_3.0-1+trusty_all.deb'
+zabbix_repo_file : 'zabbix-release_3.0-1+trusty_all.deb'
+zabbix_repo_rpm  : 'zabbix-release_3.0-1+trusty_all'
+
+schema           : /usr/share/doc/zabbix-server-mysql/create.sql.gz
+web              : apache2
+webconf          : /etc/zabbix/apache.conf
+
+## MYSQL Database settings:
+## ------------------------
+dbconn           : '1024'
+dbusername       : 'zabbix'
+dbpassword       : 'zabbix'
+dbasename        : 'zabbix'
+
+
+dbprivileges     : ['SELECT','INSERT','CREATE','UPDATE','DELETE','DROP','CREATE','ALTER','CREATE VIEW','SHOW VIEW','TRIGGER','LOCK TABLES']
+
+zabbix_packages:
+ - zabbix-server-mysql
+ - zabbix-frontend-php
+
+privileges:
+ - SUPER
+ - RELOAD
+ - CREATE
+ - ALL
+
+## NFS: 
+## ----
+nfspackages:
+ - nfs-utils
+ - libnfsidmap
+
+nfsservices:
+ - rpcbind
+ - nfs-server
+ - rpc-statd
+ - nfs-idmapd
+
+vols:
+ - /nix/volumes_splunk
+ - /nix/volumes_ora
+ - /nix/volumes_cass 
+
+## OPENSTACK Keystone settings
+## ---------------------------
+
+dbasename : 'keystone'
+password  : 'openstack'
+user      : 'keystone'
+#privs     : ['SELECT','INSERT','CREATE','UPDATE','DELETE','DROP','CREATE','ALTER','CREATE VIEW','SHOW VIEW','TRIGGER','LOCK TABLES']
+privs     : ALL
+user      : keystone
+group     : keystone
+
+
+grants:
+ - SUPER
+ - RELOAD
+ - CREATE
+ - ALL

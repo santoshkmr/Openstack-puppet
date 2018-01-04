@@ -1,0 +1,46 @@
+---
+
+## ZABBIX REPO Install:
+## --------------------
+zabbix_repo_url  : 'http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm'
+zabbix_repo_file : 'zabbix-release-3.2-1.el7.noarch.rpm'
+zabbix_repo_rpm  : 'zabbix-release-3.2-1.el7.noarch'
+
+## MYSQL Database settings:
+## ------------------------
+dbconn           : '1024'
+dbusername       : 'zabbix'
+dbpassword       : 'zabbix'
+dbasename        : 'zabbix'
+
+
+dbprivileges     : ['SELECT','INSERT','CREATE','UPDATE','DELETE','DROP','CREATE','ALTER','CREATE VIEW','SHOW VIEW','TRIGGER','LOCK TABLES']
+
+zabbix_packages:
+ - zabbix-server-mysql
+ - zabbix-web-mysql
+
+privileges:
+ - SUPER
+ - RELOAD
+ - CREATE
+ - ALL
+
+
+
+## NFS: 
+## ----
+nfspackages:
+ - nfs-utils
+ - libnfsidmap
+
+nfsservices:
+ - rpcbind
+ - nfs-server
+ - rpc-statd
+ - nfs-idmapd
+
+vols:
+ - volumes_splunk
+ - volumes_ora
+ - volumes_cass 
