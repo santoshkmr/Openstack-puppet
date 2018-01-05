@@ -1,5 +1,5 @@
 class cloudstack::endpoint {
-
+#include keystone::disable_admin_token_auth
 $randomid = $::cloudstack::randomid
 keystone_service { 
  'keystone':
@@ -16,11 +16,10 @@ class {
     region       => 'RegionOne',
  }
 keystone_domain {
- 'cloud_domain':
-    name         => 'stack.com',
+ 'stack.com':
     ensure       =>  present,
     enabled      =>  true,
-    description  => 'Cloud Domain Management',
+    description  => 'CloudStack and Devops Domain Management',
  }   
 keystone_tenant {
  'openstack':
@@ -35,11 +34,10 @@ keystone_tenant {
     ensure       =>  present,
     enabled      =>  true,
     description  => 'Cloud Project';
- 'devstack':
+ 'devstack::stack.com':
     ensure       =>  present,
     enabled      =>  true,
-    domain       => 'stack.com',
-    description  => 'Devops Project';
+    description  => 'Cloud Project';
  }
 keystone_user {
  'cloudadmin':
@@ -54,32 +52,32 @@ keystone_user {
     ensure   => present,
     enabled  => true,
     email    => 'demo@stack.com';
- 'devopsuser':
+ 'devopsuser::stack.com':
     ensure   => present,
     enabled  => true,
-    domain   => 'stack.com',
     email    => 'demo@stack.com';
  }
 keystone_role { 
  'admin':
     ensure   => present,
-    before   => [Keystone_user_role[ 'cloudadmin@openstack' ], Keystone_user_role[ 'devopsuser@devstack' ]];
+    before   => [Keystone_user_role[ 'cloudadmin@openstack' ], Keystone_user_role[ 'devopsuser@::stack.com']];
  'user':
     ensure   => present,
     before   => [Keystone_user_role[ 'cloudadmin@openstack' ], Keystone_user_role[ 'stackauser@mirantis' ]]; 
  }       
 keystone_user_role { 
  'cloudadmin@openstack':
-    roles    => ['admin'],
-    ensure   => present,
-    require  => Keystone_user[ 'cloudadmin' ];
+    roles       => ['admin'],
+    ensure      => present,
+    require     => Keystone_user[ 'cloudadmin' ];
  'stackauser@mirantis':
-    roles    => ['user'],
-    ensure   => present,
-    require  => Keystone_user[ 'stackauser' ];
- 'devopsuser@devstack':
-    roles    => ['admin'],
-    ensure   => present,
-    require  => Keystone_user[ 'devopsuser' ];
+    roles       => ['user'],
+    ensure      => present,
+    require     => Keystone_user[ 'stackauser' ];
+ 'devopsuser@::stack.com':
+    roles       => ['admin'],
+    ensure      => present,
+    user_domain => 'stack.com',
+    require     => Keystone_domain[ 'stack.com' ];
  }
 } 
