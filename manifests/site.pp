@@ -17,9 +17,9 @@ node 'zabx.stack.com', 'cloud.stack.com' {
 }
 node 'openstack.stack.com', 'canonical.stack.com' {
  Exec { path => "/usr/bin:/usr/sbin/:/bin:/sbin" }
- include cloudstack::params
- include cloudstack
- include cloudstack::mysqldb
+# include cloudstack::params
+# include cloudstack
+# include cloudstack::mysqldb
 # include cloudstack::files
- include cloudstack::endpoint
+include cloudstack::endpoint
 } 
