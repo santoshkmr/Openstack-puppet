@@ -1,0 +1,25 @@
+class webserver (
+ $apache_logdir = $::webserver::params::apache_logdir, 
+) inherits webserver::params {
+ 
+class { 'apache': 
+ default_vhost => false,
+}
+
+apache::vhost { 
+ 'user.example.com':
+    port            => 80,
+    httpd_dir       => '/etc/httpd',
+    confd_dir       => '/etc/httpd/conf.d',
+    docroot         => '/var/www/html',
+    docroot_mode    => 755,
+    logroot         => '/var/log/httpd',
+    servername      => 'www.stack.com',
+    docroot_owner   => apache,
+    docroot_group   => apache,
+    conf_template   => template('
+    access_log_file => "${logroot}/stack.com_access.log",
+    error_log_file  => "${logroot}/stack.com_error.log",
+    require         => Class[ 'apache' ],
+  }
+}
