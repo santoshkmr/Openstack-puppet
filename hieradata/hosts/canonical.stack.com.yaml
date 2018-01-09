@@ -1,0 +1,34 @@
+---
+
+## OPENSTACK Keystone settings
+## ---------------------------
+
+databname : 'keystone'
+password  : 'openstack'
+dbaseuser : 'keystone'
+privs     : ['SELECT','INSERT','CREATE','UPDATE','DELETE','DROP','CREATE','ALTER','CREATE VIEW','SHOW VIEW','TRIGGER','LOCK TABLES']
+user      : keystone
+group     : keystone
+
+
+grants:
+ - SUPER
+ - RELOAD
+ - CREATE
+ - ALL
+
+mysqlfile : '/etc/mysql/conf.d/mysqld_openstack.cnf'
+mysqlsvc  : 'mysql' 
+softwarepkgs:
+ - python-openstackclient
+ - rabbitmq-server
+ - memcached
+ - python-memcache
+ - mariadb-server
+ - python-pymysql
+ - keystone
+ - apache2
+ - libapache2-mod-wsgi
+ - mongodb-server
+ - mongodb-clients
+ - python-pymongo

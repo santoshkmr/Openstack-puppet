@@ -1,0 +1,4 @@
+---
+
+installer : 'dpkg'
+options   : '-i'

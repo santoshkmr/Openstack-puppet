@@ -1,0 +1,12 @@
+---
+
+## CentOS 7 REPO
+## -------------
+epelurl  : http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+epelfile : epel-release-latest-7.noarch
+EPEL     : epel
+link     : https://mirrors.fedoraproject.org/metalink?repo=epel-debug-7&arch=$basearch
+method   : priority
+enable   : 1
+check    : 1
+key      : file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7

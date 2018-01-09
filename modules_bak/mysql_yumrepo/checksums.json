@@ -1,0 +1,11 @@
+{
+  "CHANGELOG.md": "db6ad9f258d1a9daabfa625eebc5ec4c",
+  "Gemfile": "7ffd37401ba130a125538d99abe48256",
+  "LICENSE": "0d7d2e0097bad962d1249d5e6bf51744",
+  "README.md": "2f58a8821b23a606bfbcc75eb62b9e34",
+  "Rakefile": "72e8a5871babd70363b211287335a130",
+  "files/RPM-GPG-KEY-mysql": "5360ac696bb7046b3b86664d51af16f5",
+  "manifests/init.pp": "79b34b57663ad6385fcb29083e00a64e",
+  "manifests/rpm_gpg_key.pp": "a014d9be1d9ef245407848270274787b",
+  "metadata.json": "13d758b94be28a92e77ced6fd4cd1257"
+}
